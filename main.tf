@@ -25,21 +25,22 @@ resource "aws_security_group" "rabbitmq" {
   
   }
   
-  resource "aws_mq_configuration" "rabbitmq" {
-  description    = "${var.env}-rabbitmq-configuration" 
-  name           ="${var.env}-rabbitmq-configuration" 
-  engine_type    = var.engine_type
-  engine_version = var.engine_version
-  data = ""
+#   resource "aws_mq_configuration" "rabbitmq" {
+#   description    = "${var.env}-rabbitmq-configuration" 
+#   name           ="${var.env}-rabbitmq-configuration" 
+#   engine_type    = var.engine_type
+#   engine_version = var.engine_version
+#   data = ""
 
- }
+# }
   
   
   
   
 resource "aws_mq_broker" "rabbitmq" {
   broker_name = "${var.env}-rabbitmq" 
-   deployemnt_mode    = var.deployemnt_mode
+  # deployemnt_mode    = var.deployemnt_mode
+  deployemnt_mode = var.deployemnt_mode
   use_aws_owned_key = false
   kms_key_id = data.aws_kms_key.key.arm
     engine_type    = var.engine_type
