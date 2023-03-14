@@ -39,7 +39,7 @@ resource "aws_security_group" "rabbitmq" {
   
 resource "aws_mq_broker" "rabbitmq" {
   broker_name = "${var.env}-rabbitmq" 
-  deployement_mode = var.deployement_mode
+  deployment_mode = var.deployment_mode
   kms_key_id = data.aws_kms_key.key.arm
     engine_type    = var.engine_type
   engine_version = var.engine_version
