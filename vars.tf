@@ -5,4 +5,4 @@ variable "allow_cidr" {}
 variable "engine_type"{}
 variable "engine_version" {}
 variable "host_instance_type" {}
-variable "deployement_mode" {}
+variable "deployment_mode" {}
