@@ -39,20 +39,24 @@ resource "aws_security_group" "rabbitmq" {
   
 resource "aws_mq_broker" "rabbitmq" {
   broker_name = "${var.env}-rabbitmq" 
+  deployemnt_mode = "SINGLE_INSTANCE"
+  use_aws_owned_key = false
+  kms_key_id = data.aws_kms_key.key.arm
+    engine_type    = var.engine_type
+  engine_version = var.engine_version
+  host_instance_type = var.host_instance_type
+  security_groups    = [aws_security_group.rabbitmq.id]
+  subnet_ids =  var.deployemnt_mode == "SINGLE_INSTANCE" ? [var.subnet_ids[0]] : var.subnet_ids
+  deployemnt_mode = 
+
+  
 
   configuration {
     id       = aws_mq_configuration.rabbitmq.id
     revision = aws_mq_configuration.rabbitmq.latest_revision
   }
-  engine_type    = var.engine_type
-  engine_version = var.engine_version
-  
-
-  host_instance_type = var.host_instance_type
-  security_groups    = [aws_security_group.test.id]
-
   user {
-    username = "ExampleUser"
-    password = "MindTheGap"
+    username = data.aws_ssm_parameter.USER
+    password = data.aws_ssm_parameter.PASS
   }
 }
