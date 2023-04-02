@@ -93,5 +93,5 @@ resource "aws_mq_broker" "rabbitmq" {
 resource "aws_ssm_parameter" "rabbitmq_ENDPOINT" {
   name  = "${var.env}.rabbitmq.DOCDB_URL"
   type  = "String"
-  value = aws_mq_broker.rabbitmq.instances.0.endpoints 
+  value = aws_mq_broker.rabbitmq.instances.0.endpoints.0
 }
