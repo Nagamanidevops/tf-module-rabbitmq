@@ -220,7 +220,9 @@ resource "aws_spot_instance_request" "raabbitmq" {
   wait_for_fulfillment = true
     
   user_data = base64encode(templatefile("${path.module}/user-data.sh", { component = "rabbitmq", env = var.env }))
-  iam_instance_profile = aws_iam_instance_profile.name
+ // iam_instance_profile = aws_iam_instance_profile.name
+  iam_instance_profile   = aws_iam_instance_profile.profile.name
+
   tags = merge(
     local.common_tags,
     { Name = "${var.env}-rabbitmq" }
