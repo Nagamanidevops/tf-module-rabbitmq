@@ -106,8 +106,8 @@ resource "aws_security_group" "main" {
   policy_arn = aws_iam_policy.policy.arn
 }
 resource "aws_security_group" "rabbitmq" {
-  name        = "${var.env}-rabbitmq-security-group"
-  description = "${var.env}-rabbitmq-security-group"
+  name        = "${var.env}-rabbitmq-security-group1"
+  description = "${var.env}-rabbitmq-security-group1"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -134,7 +134,7 @@ resource "aws_security_group" "rabbitmq" {
 
    tags = merge(
     local.common_tags,
-    { Name = "${var.env}-rabbitmq-security-group" }
+    { Name = "${var.env}-rabbitmq-security-group1" }
   )
   
   }
