@@ -32,12 +32,19 @@ resource "aws_security_group" "main" {
   description = "${var.env}-${var.component}-security-group"
   vpc_id      = var.vpc_id
 
-  ingress {
-    description      = "HTTP"
-    from_port        = var.app_port
-    to_port          = var.app_port
-    protocol         = "tcp"
-    cidr_blocks      = var.allow_cidr
+  # ingress {
+  #   description      = "HTTP"
+  #   from_port        = var.app_port
+  #   to_port          = var.app_port
+  #   protocol         = "tcp"
+  #   cidr_blocks      = var.allow_cidr
+  # }
+   ingress {
+    description = "RabbitMQ"
+    from_port   = 5672
+    to_port     = 5672
+    protocol    = "tcp"
+    cidr_blocks = var.allow_cidr
   }
   
   ingress {
