@@ -212,22 +212,22 @@ resource "aws_security_group" "rabbitmq" {
 # }
 
 # Request a spot instance at $0.03
-resource "aws_spot_instance_request" "raabbitmq" {
-  ami           = data.aws_ami.centos8.image_id
-  instance_type = "t3.small"
-  subnet_id = var.subnet_ids[0]
-  vpc_security_group_ids = [aws_security_group.rabbitmq.id]
-  wait_for_fulfillment = true
+# resource "aws_spot_instance_request" "raabbitmq" {
+#   ami           = data.aws_ami.centos8.image_id
+#   instance_type = "t3.small"
+#   subnet_id = var.subnet_ids[0]
+#   vpc_security_group_ids = [aws_security_group.rabbitmq.id]
+#   wait_for_fulfillment = true
     
-  user_data = base64encode(templatefile("${path.module}/user-data.sh", { component = "rabbitmq", env = var.env }))
- // iam_instance_profile = aws_iam_instance_profile.name
-  iam_instance_profile   = aws_iam_instance_profile.profile.name
+#   user_data = base64encode(templatefile("${path.module}/user-data.sh", { component = "rabbitmq", env = var.env }))
+# // iam_instance_profile = aws_iam_instance_profile.name
+#   iam_instance_profile   = aws_iam_instance_profile.profile.name
 
-  tags = merge(
-    local.common_tags,
-    { Name = "${var.env}-rabbitmq" }
-  )
-}
+#   tags = merge(
+#     local.common_tags,
+#     { Name = "${var.env}-rabbitmq" }
+#   )
+# }
 
 resource "aws_route53_record" "rabbitmq" {
   zone_id = "Z040551911633GDXPWZA8"
