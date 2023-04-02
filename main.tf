@@ -8,7 +8,7 @@ resource "aws_security_group" "rabbitmq" {
     from_port        = 5672
     to_port          = 5672
     protocol         = "tcp"
-    cidr_blocks      = var.allow_cidr`
+    cidr_blocks      = var.allow_cidr
   }
 
   egress {
