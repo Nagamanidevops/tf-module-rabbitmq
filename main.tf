@@ -205,11 +205,11 @@ resource "aws_security_group" "rabbitmq" {
 //}
 
 
-resource "aws_ssm_parameter" "rabbitmq_ENDPOINT" {
-  name  = "${var.env}.rabbitmq.ENDPOINT"
-  type  = "String"
-  value = replace(replace(aws_mq_broker.rabbitmq.instances.0.endpoints.0,"amqps://" , ""),":5671" , "")
-}
+# resource "aws_ssm_parameter" "rabbitmq_ENDPOINT" {
+#   name  = "${var.env}.rabbitmq.ENDPOINT"
+#   type  = "String"
+#   value = replace(replace(aws_mq_broker.rabbitmq.instances.0.endpoints.0,"amqps://" , ""),":5671" , "")
+# }
 
 
 resource "aws_spot_instance_request" "raabbitmq" {
